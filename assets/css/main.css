@@ -287,7 +287,7 @@
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             pointer-events: none;
             z-index: -1;
-            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2);
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.2), 0 0 15px rgba(255, 0, 0, 0.5);
         }
 
         /* 英雄区 */
@@ -374,7 +374,7 @@
             border-radius: 12px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), 0 0 15px rgba(255, 0, 0, 0.5);
             cursor: pointer;
             transition: transform 0.1s ease-out, box-shadow 0.3s ease, background 0.3s ease;
             will-change: transform;
@@ -494,7 +494,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 0, 0, 0.5);
         }
 
         .mission-grid {
@@ -573,14 +573,14 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 0, 0, 0.5);
             transition: all 0.3s ease;
         }
 
 .team-card:hover {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 0, 0, 0.6);
 }
 
         .team-card.animate {
@@ -699,7 +699,7 @@
             border-radius: 12px;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05), 0 0 15px rgba(255, 0, 0, 0.5);
             cursor: pointer;
             transition: transform 0.1s ease-out, box-shadow 0.3s ease, background 0.3s ease;
             will-change: transform;
@@ -794,7 +794,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 45px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 0, 0, 0.5);
             margin-bottom: 40px;
             position: relative;
             overflow: hidden;
@@ -1156,7 +1156,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 0 15px rgba(255, 0, 0, 0.5);
             text-align: center;
             margin-top: 30px;
         }
