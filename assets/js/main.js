@@ -54,12 +54,10 @@
             // 初始化指示器位置
             function moveIndicator(element) {
                 const width = element.offsetWidth;
-                const navLinksRect = document.querySelector('.nav-links').getBoundingClientRect();
-                const elementRect = element.getBoundingClientRect();
-                const left = elementRect.left - navLinksRect.left;
+                const left = element.offsetLeft;
                 
-                indicator.style.width = `${width + 20}px`;
-                indicator.style.left = `${left - 10}px`;
+                indicator.style.width = `${width}px`;
+                indicator.style.left = `${left}px`;
             }
 
             const activeLink = document.querySelector('.nav-links a.active');
@@ -504,8 +502,8 @@ researchTabs.forEach(tab => {
         const centerY = rect.height / 2;
         
         // 计算倾斜角度
-        const rotateX = - (y - centerY) / 10;
-        const rotateY = - (centerX - x) / 30;
+        const rotateX = (y - centerY) / 5;
+        const rotateY = (centerX - x) / 25;
         
         // 应用变换
         tab.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
