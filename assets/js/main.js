@@ -142,6 +142,12 @@
                                 card.classList.add('animate');
                             }, (cardCount - 1 - index) * 100);
                         });
+                    } else if (tabId === 'news') {
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('animate');
+                            }, index * 150);
+                        });
                     }
                 }, 100);
             });
@@ -155,6 +161,56 @@
                 behavior: 'smooth'
             });
         }
+
+        // 新闻稿图片横向滚动
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const scrollCards = document.querySelectorAll('.news-scroll-card');
+                console.log('找到的滚动卡片数量:', scrollCards.length);
+
+                scrollCards.forEach(function(card, index) {
+                    const container = card.querySelector('.news-images-container');
+                    const scrollWrapper = card.querySelector('.news-images-scroll');
+                    console.log('卡片', index, '的滚动容器:', container);
+                    console.log('卡片', index, '的滚动包装器:', scrollWrapper);
+
+                    if (!container || !scrollWrapper) {
+                        console.log('卡片', index, '没有找到滚动容器或包装器');
+                        return;
+                    }
+
+                    // 计算可滚动的最大距离
+                    function getMaxScroll() {
+                        const maxScroll = scrollWrapper.scrollWidth - container.clientWidth;
+                        console.log('卡片', index, '的最大滚动距离:', maxScroll);
+                        return maxScroll;
+                    }
+
+                    // 在整个卡片上监听鼠标移动
+                    card.addEventListener('mousemove', function(e) {
+                        const rect = container.getBoundingClientRect();
+                        const mouseX = e.clientX - rect.left;
+                        const containerWidth = rect.width;
+
+                        // 计算鼠标在容器中的位置比例 (0 到 1)
+                        const ratio = Math.max(0, Math.min(1, mouseX / containerWidth));
+
+                        // 根据鼠标位置计算滚动位置，考虑右侧padding
+                        const maxScroll = getMaxScroll() + 10; // 加上右侧padding
+                        const currentScroll = ratio * maxScroll;
+
+                        // 应用滚动
+                        scrollWrapper.style.transform = 'translateX(-' + currentScroll + 'px)';
+
+                        // 让提示文字也随图片滑动
+                        const scrollHint = container.querySelector('.scroll-hint');
+                        if (scrollHint) {
+                            scrollHint.style.transform = 'translateX(-' + currentScroll + 'px)';
+                        }
+                    });
+                });
+            }, 100);
+        });
         
         // 花瓣飘落效果
         function createPetals() {
@@ -367,6 +423,7 @@
                     setTimeout(() => document.getElementById('mediaCard2').classList.add('animate'), 100);
                     setTimeout(() => document.getElementById('mediaCard3').classList.add('animate'), 200);
                     setTimeout(() => document.getElementById('mediaCard4').classList.add('animate'), 300);
+                    setTimeout(() => document.getElementById('mediaCard5').classList.add('animate'), 400);
                     mediaObserver.unobserve(entry.target);
                 }
             });
@@ -465,108 +522,7 @@
         // 开始观察新添加的板块
         practiceObserver.observe(document.getElementById('practice'));
         ctaObserver.observe(document.getElementById('call-to-action'));
-
-// 按钮图标跟随鼠标移动效果
-document.addEventListener('DOMContentLoaded', function() {
-    const heroBtn = document.querySelector('.hero-btn');
-    const icon = heroBtn.querySelector('i');
-    
-    // 鼠标进入按钮时
-    heroBtn.addEventListener('mouseenter', function() {
-        // 启动动画循环
-        requestAnimationFrame(animateIcon);
-    });
-    
-    // 鼠标在按钮上移动时
-    heroBtn.addEventListener('mousemove', function(e) {
-        // 获取按钮位置信息
-        const rect = heroBtn.getBoundingClientRect();
         
-        // 计算鼠标相对于按钮中心的位置
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        // 计算鼠标相对于按钮中心的偏移量
-        const deltaX = (e.clientX - centerX) / rect.width;
-        const deltaY = (e.clientY - centerY) / rect.height;
-        
-        // 设置最大移动距离
-        const maxMove = 8;
-        
-        // 计算图标应该移动的距离
-        const moveX = deltaX * maxMove;
-        const moveY = deltaY * maxMove;
-        
-        // 应用变换
-        icon.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
-    
-    // 鼠标离开按钮时
-    heroBtn.addEventListener('mouseleave', function() {
-        // 重置图标位置
-        icon.style.transform = 'translate(0, 0)';
-    });
-    
-    // 动画循环函数
-    let animationId;
-    function animateIcon() {
-        // 这里可以添加额外的动画效果
-        animationId = requestAnimationFrame(animateIcon);
-    }
-});
-
-// 按钮文字和图标跟随鼠标移动效果
-document.addEventListener('DOMContentLoaded', function() {
-    const heroBtn = document.querySelector('.hero-btn');
-    const icon = heroBtn.querySelector('i');
-    const text = heroBtn.querySelector('span');
-    
-    // 鼠标进入按钮时
-    heroBtn.addEventListener('mouseenter', function() {
-        // 启动动画循环
-        requestAnimationFrame(animateElements);
-    });
-    
-    // 鼠标在按钮上移动时
-    heroBtn.addEventListener('mousemove', function(e) {
-        // 获取按钮位置信息
-        const rect = heroBtn.getBoundingClientRect();
-        
-        // 计算鼠标相对于按钮中心的位置
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        // 计算鼠标相对于按钮中心的偏移量
-        const deltaX = (e.clientX - centerX) / rect.width;
-        const deltaY = (e.clientY - centerY) / rect.height;
-        
-        // 设置最大移动距离
-        const maxMove = 8;
-        
-        // 计算元素应该移动的距离
-        const moveX = deltaX * maxMove;
-        const moveY = deltaY * maxMove;
-        
-        // 应用变换到文字和图标
-        text.style.transform = `translate(${moveX}px, ${moveY}px)`;
-        icon.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
-    
-    // 鼠标离开按钮时
-    heroBtn.addEventListener('mouseleave', function() {
-        // 重置文字和图标位置
-        text.style.transform = 'translate(0, 0)';
-        icon.style.transform = 'translate(0, 0)';
-    });
-    
-    // 动画循环函数
-    let animationId;
-    function animateElements() {
-        // 这里可以添加额外的动画效果
-        animationId = requestAnimationFrame(animateElements);
-    }
-});
-
 // 按钮跟随鼠标方向倾斜效果
 document.addEventListener('DOMContentLoaded', function() {
     const heroBtn = document.querySelector('.hero-btn');
@@ -663,4 +619,3 @@ function initCurrentSection() {
         }
     });
 }
-
