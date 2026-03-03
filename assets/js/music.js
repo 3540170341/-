@@ -43,8 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // 下载按钮点击动画
     downloadButtons.forEach(button => {
         button.addEventListener('click', function(e) {
-            e.preventDefault();
             
+            // 阻止事件冒泡，防止触发父级a标签的点击事件
+            e.preventDefault();
+            e.stopPropagation();
+
             // 添加下载状态类
             this.classList.add('downloading');
             
@@ -52,9 +55,20 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 this.classList.remove('downloading');
                 
-                // 这里可以添加实际的下载逻辑
-                // window.location.href = this.parentElement.href;
-            }, 3000);
+                // 实际下载逻辑
+                const link = this.parentElement;
+                const url = link.href;
+                const filename = link.download;
+                
+                // 创建隐藏的a标签来触发下载
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.style.display = 'none';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }, 500);
         });
     });
 });
