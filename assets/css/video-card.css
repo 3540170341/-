@@ -1,0 +1,326 @@
+/* 视频卡片样式 */
+.video-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 25px;
+    margin-bottom: 50px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.2),
+        0 0 30px rgba(196, 30, 58, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.video-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--primary), 
+        transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(196, 30, 58, 0.2);
+    background: #000;
+    cursor: pointer;
+}
+
+.research-video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.video-container:not(.playing):hover .video-overlay,
+.video-container.paused .video-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.video-container.playing .video-overlay {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.video-play-indicator {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.video-play-indicator i {
+    font-size: 32px;
+    color: var(--primary);
+    margin-left: 4px;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(196, 30, 58, 0.4);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 15px rgba(196, 30, 58, 0);
+    }
+}
+
+/* 视频下载按钮样式 */
+.video-download-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.video-download-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.btn-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        var(--primary) 0%, 
+        #E84545 50%, 
+        var(--primary) 100%);
+    background-size: 200% 200%;
+    animation: gradientMove 3s ease infinite;
+    border-radius: 50px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.video-download-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 10px 30px rgba(196, 30, 58, 0.4),
+        0 0 20px rgba(196, 30, 58, 0.2);
+}
+
+.video-download-btn:hover .btn-bg {
+    background-size: 300% 300%;
+    animation: gradientMove 1.5s ease infinite;
+}
+
+.video-download-btn:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.video-download-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.video-download-btn:hover::before {
+    opacity: 1;
+    animation: shine 1.5s ease-in-out infinite;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+/* 视频控制栏 */
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.video-container:hover .video-controls {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 暂停/播放按钮 */
+.video-control-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+}
+
+.video-control-btn:hover {
+    transform: scale(1.1);
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.video-control-btn:active {
+    transform: scale(0.95);
+}
+
+/* 进度条容器 */
+.video-progress-container {
+    flex: 1;
+    height: 4px;
+    position: relative;
+    cursor: pointer;
+}
+
+/* 进度条背景 */
+.video-progress-bar {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+/* 进度条填充 */
+.video-progress-filled {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), #E84545);
+    border-radius: 2px;
+    transition: width 0.1s linear;
+    position: relative;
+}
+
+.video-progress-filled::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(196, 30, 58, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.video-progress-container:hover .video-progress-filled::after {
+    opacity: 1;
+}
+
+.video-progress-container:hover .video-progress-bar {
+    height: 6px;
+}
+
+.video-progress-container:hover .video-progress-filled::after {
+    width: 12px;
+    height: 12px;
+}
